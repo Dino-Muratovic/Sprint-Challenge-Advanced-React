@@ -1,26 +1,53 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import Body from './Body';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state= {};      
+     
+  }
+
+  //Lifecycle method
+componentDidMount(){
+  this.fetchData();
+
 }
 
-export default App;
+fetchData = () => {
+  //Fetch the data
+  axios.get('http://localhost:5000/api/players')
+  //promises
+  .then(response => {
+    console.log(`this is reponse data -->`, response.data);
+    
+  //Set the state to what we drilled to
+  this.setState({
+    arrayOfData: response.data
+  })  
+
+  })
+  //catch errors if any
+  .catch(error => {
+    console.log(`there was an error`, error)
+  })
+}
+
+
+
+
+
+  render() {
+    return (
+      <div className="App">
+        <Body getData={this.state.arrayOfData} key={this.state.id} />        
+      </div>
+    )
+  }
+}
+
+  export default App;
