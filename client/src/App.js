@@ -23,7 +23,7 @@ fetchData = () => {
   axios.get('http://localhost:5000/api/players')
   //promises
   .then(response => {
-    // console.log(`this is reponse data -->`, response.data);
+    console.log(`this is reponse data -->`, response.data);
     
   //Set the state to what we drilled to
   this.setState({
@@ -44,7 +44,7 @@ fetchData = () => {
   render() {
     return (
       <div className="App">
-        <Body getData={this.state.arrayOfData} key={this.state.id}/>        
+        <Body getData={this.state.arrayOfData} key={this.state.id} />        
       </div>
     )
   }
